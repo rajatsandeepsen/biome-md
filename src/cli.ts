@@ -1,6 +1,6 @@
-import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
 import { spawnSync } from "node:child_process";
-import { join, extname } from "node:path";
+import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { extname, join } from "node:path";
 
 const SUPPORTED_LANGS = new Set([
 	"js",
@@ -151,4 +151,3 @@ for (const target of args) {
 if (hasError) {
 	process.exit(1);
 }
-

@@ -27,4 +27,3 @@ const changed = formatMarkdownFile("./README.md");
 // find all markdown files under a directory
 const files = findMarkdownFiles("./docs");
 ```
-
