@@ -10,7 +10,7 @@ npx biome-md ./docs
 npx biome-md ./README.md ./docs ./CONTRIBUTING.md
 ```
 
-`biome-md` finds all `.md` files in the given paths (recursing into directories) and formats any fenced code blocks whose language is `js`, `javascript`, `ts`, `typescript`, `jsx`, `tsx`, or `json` using `biome format`.
+`biome-md` finds all `.md` and `.mdx` files in the given paths (recursing into directories) and formats any fenced code blocks whose language is `js`, `javascript`, `ts`, `typescript`, `jsx`, `tsx`, or `json` using `biome format`.
 
 ## Requirements
 
