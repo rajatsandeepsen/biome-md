@@ -1,8 +1,8 @@
 {
-  "name": "@rajatsandeepsen/biome-md",
+  "name": "biome-md",
   "version": "0.0.1",
   "license": "MIT",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/cli.ts"
   }
 }

@@ -1,60 +1,42 @@
 {
-	"name": "biome-md",
-	"description": "Format code blocks in Markdown files using Biome",
-	"version": "0.0.1",
-	"main": "./dist/index.js",
-	"module": "./dist/index.mjs",
-	"types": "./dist/index.d.ts",
-	"bin": {
-		"biome-md": "./dist/cli.mjs"
-	},
-	"files": [
-		"dist/**/*"
-	],
-	"scripts": {
-		"build": "tsdown",
-		"build:watch": "tsdown --watch",
-		"type-check": "tsc --noEmit"
-	},
-	"exports": {
-		"./package.json": "./package.json",
-		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js"
-		}
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.4.14",
-		"@types/node": "20.17.24",
-		"tsdown": "^0.15.10",
-		"typescript": "5.6.3"
-	},
-	"peerDependencies": {
-		"@biomejs/biome": ">=1.0.0"
-	},
-	"peerDependenciesMeta": {
-		"@biomejs/biome": {
-			"optional": true
-		}
-	},
-	"engines": {
-		"node": ">=18"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/rajatsandeepsen/biome-md.git"
-	},
-	"bugs": {
-		"url": "https://github.com/rajatsandeepsen/biome-md/issues"
-	},
-	"keywords": [
-		"biome",
-		"markdown",
-		"format",
-		"cli"
-	]
+"name": "biome-md",
+"description": "Format code blocks in Markdown files using Biome",
+"version": "0.0.1",
+"bin": {
+"biome-md": "./dist/cli.mjs"
+},
+"files": ["dist/cli.mjs"],
+"scripts": {
+"build": "tsdown",
+"build:watch": "tsdown --watch",
+"type-check": "tsc --noEmit"
+},
+"devDependencies": {
+"@biomejs/biome": "^2.4.14",
+"@types/node": "20.17.24",
+"tsdown": "^0.15.10",
+"typescript": "5.6.3"
+},
+"peerDependencies": {
+"@biomejs/biome": ">=1.0.0"
+},
+"peerDependenciesMeta": {
+"@biomejs/biome": {
+"optional": true
+}
+},
+"engines": {
+"node": ">=18"
+},
+"publishConfig": {
+"access": "public"
+},
+"repository": {
+"type": "git",
+"url": "git+https://github.com/rajatsandeepsen/biome-md.git"
+},
+"bugs": {
+"url": "https://github.com/rajatsandeepsen/biome-md/issues"
+},
+"keywords": ["biome", "markdown", "format", "cli"]
 }
