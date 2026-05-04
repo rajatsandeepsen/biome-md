@@ -3,7 +3,9 @@ import { formatMarkdownFile, findMarkdownFiles } from "./index.js";
 const args = process.argv.slice(2);
 
 if (args.length === 0) {
-	console.error("Usage: biome-md <file-or-folder> [file-or-folder...]");
+	console.error(
+		"Usage: biome-md <file-or-folder> [file-or-folder...]\nFormat code blocks in Markdown files using Biome.",
+	);
 	process.exit(1);
 }
 

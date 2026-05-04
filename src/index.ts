@@ -63,13 +63,14 @@ export function formatMarkdownFile(
 	let content = readFileSync(filePath, "utf8");
 
 	// Match fenced code blocks — allow up to 3 spaces of indentation on the
-	// fence lines, which is valid per the CommonMark spec.
-	const codeBlockRegex = /^[ \t]{0,3}```(\w+)\n([\s\S]*?)^[ \t]{0,3}```/gm;
+	// fence lines, which is valid per the CommonMark spec. Capture the leading
+	// whitespace so it can be preserved in the replacement.
+	const codeBlockRegex = /(^[ \t]{0,3})```(\w+)\n([\s\S]*?)^\1```/gm;
 	let updated = false;
 
 	content = content.replace(
 		codeBlockRegex,
-		(match, lang: string, code: string) => {
+		(match, indent: string, lang: string, code: string) => {
 			if (!SUPPORTED_LANGS.has(lang.toLowerCase())) {
 				return match;
 			}
@@ -80,7 +81,7 @@ export function formatMarkdownFile(
 			// differences within the block are also detected.
 			if (formatted !== null && formatted !== code) {
 				updated = true;
-				return `\`\`\`${lang}\n${formatted.trimEnd()}\n\`\`\``;
+				return `${indent}\`\`\`${lang}\n${formatted.trimEnd()}\n${indent}\`\`\``;
 			}
 
 			return match;
