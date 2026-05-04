@@ -10,15 +10,23 @@ const trys = <T>(func: () => T): [null, T] | [Error, null] => {
 	}
 };
 
-const SUPPORTED_LANGS = new Set([
-	"js",
-	"javascript",
-	"ts",
-	"typescript",
-	"json",
-	"jsx",
-	"tsx",
+const LANGUAGE_EXTENSION_MAP = new Map<string, string>([
+	["js", "js"],
+	["javascript", "js"],
+	["ts", "ts"],
+	["typescript", "ts"],
+	["jsx", "jsx"],
+	["tsx", "tsx"],
+	["json", "json"],
+	["jsonc", "jsonc"],
+	["css", "css"],
+	["scss", "scss"],
+	["html", "html"],
+	["graphql", "graphql"],
+	["gql", "graphql"],
 ]);
+
+const SUPPORTED_LANGS = new Set(LANGUAGE_EXTENSION_MAP.keys());
 
 type FormatResult = {
 	updated: boolean;
@@ -39,11 +47,7 @@ function findBiome(): string {
 }
 
 function getLangExt(lang: string): string {
-	if (lang === "json") return "json";
-	if (lang === "tsx") return "tsx";
-	if (lang === "jsx") return "jsx";
-	if (lang.includes("ts")) return "ts";
-	return "js";
+	return LANGUAGE_EXTENSION_MAP.get(lang) ?? "js";
 }
 
 function formatCodeBlock(
@@ -122,7 +126,8 @@ function findMarkdownFiles(targetPath: string): string[] {
 	const stat = statSync(targetPath);
 
 	if (stat.isFile()) {
-		return extname(targetPath).toLowerCase() === ".md" ? [targetPath] : [];
+		const ext = extname(targetPath).toLowerCase();
+		return ext === ".md" || ext === ".mdx" ? [targetPath] : [];
 	}
 
 	if (stat.isDirectory()) {
@@ -215,15 +220,9 @@ console.log("Summary");
 console.log(`▸ Files formatted	: ${summary.formattedFiles}`);
 console.log(`▸ Files already clean	: ${summary.unchangedFiles}`);
 console.log(`▸ Files without blocks	: ${summary.filesWithoutBlocks}`);
-
-if (summary.formattedBlocks > 0)
-	console.log(`▸ Blocks formatted	: ${summary.formattedBlocks}`);
-
-if (summary.skippedBlocks > 0)
-	console.log(`▸ Blocks skipped	: ${summary.skippedBlocks}`);
-
-if (summary.errorFiles > 0)
-	console.log(`▸ Files with errors	: ${summary.errorFiles}`);
+console.log(`▸ Blocks formatted	: ${summary.formattedBlocks}`);
+console.log(`▸ Blocks skipped	: ${summary.skippedBlocks}`);
+console.log(`▸ Files with errors	: ${summary.errorFiles}`);
 
 console.log("\n");
 

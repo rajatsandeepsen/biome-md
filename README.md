@@ -15,12 +15,3 @@ npx biome-md ./README.md ./docs ./CONTRIBUTING.md
 ## Requirements
 
 Biome must be available — either installed locally (`@biomejs/biome` in your project's `node_modules`) or on your `PATH`.
-
-## Testing README
-
-```ts
-import { exec } from "child_process";
-import { promisify } from "util";
-
-const execAsync = promisify(exec);
-```
