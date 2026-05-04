@@ -1,11 +1,16 @@
 {
-	"name": "package",
-	"description": "Template for building packages",
+	"name": "biome-md",
+	"description": "Format code blocks in Markdown files using Biome",
 	"version": "0.0.1",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
-	"files": ["dist/**/*"],
+	"bin": {
+		"biome-md": "./dist/cli.mjs"
+	},
+	"files": [
+		"dist/**/*"
+	],
 	"scripts": {
 		"build": "tsdown",
 		"build:watch": "tsdown --watch",
@@ -17,22 +22,21 @@
 			"types": "./dist/index.d.ts",
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
-		},
-		"./type": {
-			"types": "./dist/type.d.ts"
 		}
 	},
-	"dependencies": {},
 	"devDependencies": {
-		"@types/bun": "^1.2.17",
+		"@biomejs/biome": "^2.4.14",
 		"@types/node": "20.17.24",
-		"bun-plugin-dts": "^0.3.0",
 		"tsdown": "^0.15.10",
-		"typescript": "5.6.3",
-		"zod": "^3.25.67"
+		"typescript": "5.6.3"
 	},
 	"peerDependencies": {
-		"zod": "^3.0.0"
+		"@biomejs/biome": ">=1.0.0"
+	},
+	"peerDependenciesMeta": {
+		"@biomejs/biome": {
+			"optional": true
+		}
 	},
 	"engines": {
 		"node": ">=18"
@@ -42,10 +46,15 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/manolo-in/package.git"
+		"url": "git+https://github.com/rajatsandeepsen/biome-md.git"
 	},
 	"bugs": {
-		"url": "https://github.com/manolo-in/package/issues"
+		"url": "https://github.com/rajatsandeepsen/biome-md/issues"
 	},
-	"keywords": []
+	"keywords": [
+		"biome",
+		"markdown",
+		"format",
+		"cli"
+	]
 }
