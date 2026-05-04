@@ -16,14 +16,11 @@ npx biome-md ./README.md ./docs ./CONTRIBUTING.md
 
 Biome must be available — either installed locally (`@biomejs/biome` in your project's `node_modules`) or on your `PATH`.
 
-## Programmatic API
+## Testing README
 
 ```ts
-import { formatMarkdownFile, findMarkdownFiles } from "biome-md";
+import { exec } from "child_process";
+import { promisify } from "util";
 
-// format a single file
-const changed = formatMarkdownFile("./README.md");
-
-// find all markdown files under a directory
-const files = findMarkdownFiles("./docs");
+const execAsync = promisify(exec);
 ```

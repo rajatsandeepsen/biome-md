@@ -9,8 +9,9 @@
 		"dist/cli.mjs"
 	],
 	"scripts": {
+		"dev": "bun run ./src/cli.ts",
+		"cli": "bun run ./dist/cli.mjs",
 		"build": "tsdown",
-		"build:watch": "tsdown --watch",
 		"type-check": "tsc --noEmit"
 	},
 	"devDependencies": {
