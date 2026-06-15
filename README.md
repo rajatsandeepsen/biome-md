@@ -1,3 +1,7 @@
+<a href="https://github.com/rajatsandeepsen/biome-md">
+    <img alt="cover" src="https://github.com/rajatsandeepsen/biome-md/blob/main/cover.png?raw=true" />
+</a>
+
 # biome-md
 
 Format code blocks in Markdown files using [Biome](https://biomejs.dev).
