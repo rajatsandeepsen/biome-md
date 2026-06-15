@@ -1,7 +1,7 @@
 {
 	"name": "biome-md",
 	"description": "A simple CLI that format your code inside README files with Biome",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"bin": {
 		"biome-md": "./dist/cli.mjs"
 	},
@@ -10,6 +10,7 @@
 	],
 	"scripts": {
 		"dev": "bun run ./src/cli.ts",
+		"rage": "bun run dev --rage",
 		"cli": "bun run ./dist/cli.mjs",
 		"prepublishOnly": "bun run build",
 		"build": "tsdown",

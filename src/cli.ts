@@ -50,6 +50,17 @@ function getLangExt(lang: string): string {
 	return LANGUAGE_EXTENSION_MAP.get(lang) ?? "js";
 }
 
+function getBiomeConfigFromRage(biomeBin: string): string | null {
+	const result = spawnSync(biomeBin, ["rage"], { encoding: "utf8" });
+
+	if (result.error || result.status !== 0) {
+		return null;
+	}
+
+	const output = `${result.stdout}\n${result.stderr}`;
+	return output.trim();
+}
+
 function formatCodeBlock(
 	code: string,
 	lang: string,
@@ -145,20 +156,32 @@ function findMarkdownFiles(targetPath: string): string[] {
 }
 
 const args = process.argv.slice(2);
+const shouldPrintRage = args.includes("--rage");
+const targets = args.filter((arg) => arg !== "--rage");
 
-if (args.length === 0) {
+if (targets.length === 0) {
 	console.error(
-		"Usage: biome-md <file-or-folder> [file-or-folder...]",
+		"Usage: biome-md [--rage] <file-or-folder> [file-or-folder...]",
 		"Format code blocks in Markdown files using Biome.",
 	);
 	process.exit(1);
 }
 
 const bin = findBiome();
+if (shouldPrintRage) {
+	const biomeRageConfig = getBiomeConfigFromRage(bin);
+	console.log(`Using Biome binary: ${bin}\n`);
+	console.log(
+		biomeRageConfig
+			? `Biome rage: ${biomeRageConfig}`
+			: "Biome rage: <unable to detect config line>",
+	);
+}
+
 let hasError = false;
 
 const summary = {
-	targets: args.length,
+	targets: targets.length,
 	formattedFiles: 0,
 	unchangedFiles: 0,
 	filesWithoutBlocks: 0,
@@ -167,7 +190,7 @@ const summary = {
 	skippedBlocks: 0,
 };
 
-for (const target of args) {
+for (const target of targets) {
 	console.log(`\n${target.replace("./", "")}`);
 
 	const [error, files] = trys(() => findMarkdownFiles(target));
