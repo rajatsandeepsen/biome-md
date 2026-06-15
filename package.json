@@ -1,7 +1,7 @@
 {
 	"name": "biome-md",
 	"description": "A simple CLI that format your code inside README files with Biome",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"bin": {
 		"biome-md": "./dist/cli.mjs"
 	},

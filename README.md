@@ -8,7 +8,11 @@ Format code blocks in Markdown files using [Biome](https://biomejs.dev).
 
 ## Usage
 
-```sh
+```bash
+npx biome-md ./
+```
+
+```bash
 npx biome-md ./README.md
 npx biome-md ./docs
 npx biome-md ./README.md ./docs ./CONTRIBUTING.md
@@ -26,7 +30,7 @@ If you have a local Biome installation with `biome.json` or `biome.jsonc` files,
 
 When you need to verify which Biome setup is being picked up, run with `--rage`:
 
-```sh
+```bash
 npx biome-md --rage ./README.md
 ```
 
