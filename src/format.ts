@@ -38,7 +38,7 @@ export function formatMarkdownFile(filePath: string, biomeBin: string) {
 	let ignoredBlocks = 0;
 
 	content = content.replaceAll(codeBlockRegex, (original, ...rest) => {
-		const [indent, fence, language, code] = rest as MatchedRegexData;
+		const [indent, fence, info, code] = rest as MatchedRegexData;
 
 		totalBlocks += 1;
 
@@ -47,9 +47,10 @@ export function formatMarkdownFile(filePath: string, biomeBin: string) {
 			return original;
 		}
 
+		const language = info.trim().split(/\s+/)[0] ?? "";
 		const normalizedLang = language.toLowerCase();
 
-		if (!SUPPORTED_LANGS.has(normalizedLang)) {
+		if (!normalizedLang || !SUPPORTED_LANGS.has(normalizedLang)) {
 			skippedBlocks += 1;
 			return original;
 		}
@@ -61,7 +62,7 @@ export function formatMarkdownFile(filePath: string, biomeBin: string) {
 				updated = true;
 				formattedBlocks += 1;
 				return recreateCodeBlock({
-					language: normalizedLang,
+					info,
 					code: formattedCode.trimEnd(),
 					indent,
 					fence,

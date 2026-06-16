@@ -24,20 +24,20 @@ export const SUPPORTED_LANGS = new Set(LANGUAGE_EXTENSION_MAP.keys());
 // fence lines, which is valid per the CommonMark spec. Capture the leading
 // whitespace so it can be preserved in the replacement.
 export const codeBlockRegex =
-	/(?<indent>^[ \t]{0,3})(?<fence>`{3,})(?<language>\w+)\r?\n(?<code>[\s\S]*?)^\k<indent>\k<fence>\r?(?=\n|$)/gm;
+	/(?<indent>^[ \t]{0,3})(?<fence>`{3,})(?<info>[^\r\n]*)\r?\n(?<code>[\s\S]*?)^\k<indent>\k<fence>[ \t]*\r?(?=\n|$)/gm;
 
 export type MatchedRegexData = [
 	indent: string,
 	fence: string,
-	language: string,
+	info: string,
 	code: string,
 ];
 
 export const recreateCodeBlock = ({
 	indent,
 	fence,
-	language,
+	info,
 	code,
-}: Record<"indent" | "fence" | "language" | "code", string>) => {
-	return `${indent}${fence}${language}\n${code}\n${indent}${fence}`;
+}: Record<"indent" | "fence" | "info" | "code", string>) => {
+	return `${indent}${fence}${info}\n${code}\n${indent}${fence}`;
 };
