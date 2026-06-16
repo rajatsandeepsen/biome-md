@@ -64,3 +64,25 @@ npx biome-md --show-config
 ```
 
 This uses `biome rage` and we'll print the active config in your project if present.
+
+## Ignore Code Blocks
+
+Just use ```` instead of ```
+
+Eg:
+`````
+````
+(__)
+oo )_______
+|_/\       |\
+    ||___  | \
+    ||   W||
+````
+``````
+
+````
+```js
+const dontFormatMe = please ( . . . . )
+// Because it's a code-block inside code-block
+```
+````

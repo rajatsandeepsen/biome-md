@@ -69,6 +69,7 @@ const summary = {
 	errorFiles: 0,
 	formattedBlocks: 0,
 	skippedBlocks: 0,
+	ignoredBlocks: 0,
 };
 
 for (const target of targets) {
@@ -95,6 +96,7 @@ for (const target of targets) {
 			const result = formatMarkdownFile(file, bin);
 			summary.formattedBlocks += result.formattedBlocks;
 			summary.skippedBlocks += result.skippedBlocks;
+			summary.ignoredBlocks += result.ignoredBlocks;
 
 			if (result.updated) {
 				summary.formattedFiles += 1;
@@ -126,6 +128,7 @@ console.log(`▸ Files already clean	: ${summary.unchangedFiles}`);
 console.log(`▸ Files without blocks	: ${summary.filesWithoutBlocks}`);
 console.log(`▸ Blocks formatted	: ${summary.formattedBlocks}`);
 console.log(`▸ Blocks skipped	: ${summary.skippedBlocks}`);
+console.log(`▸ Blocks ignored	: ${summary.ignoredBlocks}`);
 console.log(`▸ Files with errors	: ${summary.errorFiles}`);
 
 console.log("\n");
