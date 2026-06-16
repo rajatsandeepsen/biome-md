@@ -20,6 +20,25 @@ npx biome-md ./README.md ./docs ./CONTRIBUTING.md
 
 `biome-md` finds all `.md` and `.mdx` files in the given paths (recursing into directories) and formats any fenced code blocks whose language is `js`, `javascript`, `ts`, `typescript`, `jsx`, `tsx`, or `json` using `biome format`.
 
+## Example
+
+````diff
+```js
+- function 
+- 	greet(
+- 		name) {console
+- 			.log(`Hello, ${name}!`
+- 	);
+- 		}
+```
+
+```js
++ function greet(name) {
++ 	 console.log(`Hello, ${name}!`);
++ }
+```
+````
+
 ## Requirements
 
 Biome must be available — either installed locally (`@biomejs/biome` in your project's `node_modules`) or on your `PATH`.
