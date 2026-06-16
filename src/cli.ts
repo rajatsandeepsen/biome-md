@@ -1,26 +1,57 @@
+import { readFileSync } from "node:fs";
 import { basename } from "node:path";
 import { findBiome, findMarkdownFiles } from "./find";
 import { formatMarkdownFile } from "./format";
-import { getBiomeConfigFromRage } from "./rage";
+import { extractConfigPath, getBiomeConfigFromRage } from "./rage";
 import { trys } from "./utils";
 
 const args = process.argv.slice(2);
 const shouldPrintRage = args.includes("--rage");
-const targets = args.filter((arg) => arg !== "--rage");
+const showConfig = args.includes("--show-config");
+
+const targets = args.filter((arg) => arg.startsWith("-") === false);
 
 const bin = findBiome();
 
 if (shouldPrintRage) {
+	console.log(`Binary:\n  ${bin}\n`);
 	const biomeRageConfig = getBiomeConfigFromRage(bin);
-	console.log(`Using Biome binary: ${bin}\n`);
 
-	if (biomeRageConfig) console.log(`Biome rage: ${biomeRageConfig}`);
-	else console.error("Biome rage: <unable to detect config line>");
+	if (!biomeRageConfig) {
+		console.error("Biome rage: <unable to run rage>");
+		process.exit(1);
+	}
 
-	if (targets.length === 0) process.exit(0);
+	console.log(biomeRageConfig);
+}
+
+if (showConfig) {
+	const biomeRageConfig = getBiomeConfigFromRage(bin);
+	if (!biomeRageConfig) {
+		console.error("Biome rage: <unable to run rage>");
+		process.exit(1);
+	}
+
+	const configFilePath = extractConfigPath(biomeRageConfig);
+	if (!configFilePath) {
+		console.error("Biome rage: <no config file path found in rage>");
+		process.exit(1);
+	}
+
+	const [_, fileContent] = trys(() => readFileSync(configFilePath, "utf8"));
+	if (!fileContent) {
+		console.error(
+			`Biome rage --show-config: <unable to read config file at ${configFilePath}>`,
+		);
+		process.exit(1);
+	}
+
+	console.log(fileContent);
 }
 
 if (targets.length === 0) {
+	if (shouldPrintRage || showConfig) process.exit(0);
+
 	console.error(
 		"Usage: biome-md [--rage] <file-or-folder> [file-or-folder...]",
 	);

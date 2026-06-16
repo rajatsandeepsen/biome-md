@@ -4,7 +4,7 @@
 
 # biome-md
 
-Format code blocks in Markdown files using [Biome](https://biomejs.dev).
+A simple CLI that format code-block inside your markdown files using [Biome](https://biomejs.dev).
 
 ## Usage
 
@@ -31,7 +31,17 @@ If you have a local Biome installation with `biome.json` or `biome.jsonc` files,
 When you need to verify which Biome setup is being picked up, run with `--rage`:
 
 ```bash
-npx biome-md --rage ./README.md
+npx biome-md --rage
 ```
 
 This prints extra Biome diagnostics (via `biome rage`) before formatting so you can inspect the config being used.
+
+---
+
+When you just want to see the active config Biome will be using, run with `--show-config`:
+
+```bash
+npx biome-md --show-config
+```
+
+This uses `biome rage` and we'll print the active config in your project if present.

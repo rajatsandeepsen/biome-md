@@ -1,7 +1,7 @@
 {
 	"name": "biome-md",
-	"description": "A simple CLI that format your code inside README files with Biome",
-	"version": "0.0.3",
+	"description": "A simple CLI that format code-block inside your markdown files using Biome",
+	"version": "0.0.4",
 	"bin": {
 		"biome-md": "./dist/cli.mjs"
 	},
@@ -11,10 +11,11 @@
 	"scripts": {
 		"dev": "bun run ./src/cli.ts",
 		"rage": "bun run dev --rage",
+		"config": "bun run dev --show-config",
 		"cli": "bun run ./dist/cli.mjs",
 		"prepublishOnly": "bun run build",
 		"build": "tsdown",
-		"type-check": "tsc --noEmit"
+		"check": "tsc --noEmit"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.14",

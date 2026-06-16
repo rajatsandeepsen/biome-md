@@ -10,3 +10,21 @@ export function getBiomeConfigFromRage(biomeBin: string): string | null {
 	const output = `${result.stdout}\n${result.stderr}`;
 	return output.trim();
 }
+
+export const extractConfigPath = (
+	biomeRageConfig: NonNullable<ReturnType<typeof getBiomeConfigFromRage>>,
+) => {
+	const key = "Path:";
+
+	const configLine = biomeRageConfig
+		.split("\n")
+		.find((line) => line.includes(key));
+
+	if (!configLine) return null;
+
+	const path = configLine.replace(key, "").trim();
+
+	if (path === "unset") return null;
+
+	return path;
+};
