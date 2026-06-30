@@ -16,8 +16,11 @@ function formatCodeBlock(
 	const ext = getLangExt(lang);
 	const result = spawnSync(
 		biomeBin,
-		["format", `--stdin-file-path=stdin.${ext}`],
-		{ input: code, encoding: "utf8" },
+		["format", `--stdin-file-path=file.${ext}`],
+		{
+			input: code,
+			encoding: "utf-16le",
+		},
 	);
 
 	if (result.error || result.status !== 0) {
